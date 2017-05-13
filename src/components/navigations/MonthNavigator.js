@@ -1,12 +1,19 @@
 import React from 'react'
 import { months, defaultStyles } from '../../variables'
+import MonthDropdown from './MonthDropdown'
 
 const MonthNavigator = (props) => {
 	return (
 		<div style={styles.monthNavigator}>
 			<button style={styles.navigationButton} onClick={props.showPrevMonth}>&lt;</button>
-			<div style={styles.monthDropdown}>{months[props.currentMonth]} {props.currentYear}</div>
+			<div style={styles.monthDropdown} onClick={props.toggleMonthDropdownModal}>{months[props.currentMonth]} {props.currentYear}</div>
 			<button style={styles.navigationButton} onClick={props.showNextMonth}>&gt;</button>
+			<MonthDropdown 
+				currentYear={props.currentYear} 
+				currentMonth={props.currentMonth} 
+				show={props.showMonthDropdownModal} 
+				toggleMonthDropdownModal={props.toggleMonthDropdownModal}
+				goToMonth={props.goToMonth} />
 		</div>
 	)
 }
@@ -28,6 +35,7 @@ const styles = {
 	},
 	monthDropdown: {
 		color: defaultStyles.primaryColor,
+		cursor: 'pointer',
 		display: 'inline-block',
 		padding: '10px 0',
 		textAlign: 'center',

@@ -10,7 +10,10 @@ const Navigation = (props) => {
 				currentMonth={props.currentMonth} 
 				showPrevMonth={props.showPrevMonth}
 				showNextMonth={props.showNextMonth}
-				goToToday={props.goToToday}/>
+				goToToday={props.goToToday}
+				showMonthDropdownModal={props.showMonthDropdownModal}
+				toggleMonthDropdownModal={props.toggleMonthDropdownModal}
+				goToMonth={props.goToMonth} />
 			<button type="button" style={styles.goToToday} onClick={props.goToToday}>Go to Today</button>
 		</div>
 	)

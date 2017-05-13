@@ -8,12 +8,15 @@ class CalendarWrapper extends React.Component {
 		super(props)
 
 		this.state = {
-			currentDate: new Date()
+			currentDate: new Date(),
+			showMonthDropdownModal: false
 		}
 
 		this.showPrevMonth = this.showPrevMonth.bind(this)
 		this.showNextMonth = this.showNextMonth.bind(this)
 		this.goToToday = this.goToToday.bind(this)
+		this.toggleMonthDropdownModal = this.toggleMonthDropdownModal.bind(this)
+		this.goToMonth = this.goToMonth.bind(this)
 	}
 
 	showPrevMonth() {
@@ -32,6 +35,14 @@ class CalendarWrapper extends React.Component {
 		this.setState({currentDate: new Date()})
 	}
 
+	toggleMonthDropdownModal() {
+		this.setState({showMonthDropdownModal: !this.state.showMonthDropdownModal})
+	}
+
+	goToMonth(month, year) {		
+		this.setState({currentDate: new Date(year, month)})
+	}
+
 	render() {
 		let style = Object.assign({}, styles, {height: this.props.height, width: this.props.width})
 		return (
@@ -41,7 +52,10 @@ class CalendarWrapper extends React.Component {
 					currentMonth={this.state.currentDate.getMonth()} 
 					showPrevMonth={this.showPrevMonth}
 					showNextMonth={this.showNextMonth}
-					goToToday={this.goToToday} />
+					goToToday={this.goToToday}
+					showMonthDropdownModal={this.state.showMonthDropdownModal}
+					toggleMonthDropdownModal={this.toggleMonthDropdownModal}
+					goToMonth={this.goToMonth} />
 				<CalendarBoard 
 					currentDate={this.state.currentDate} />
 			</div>
