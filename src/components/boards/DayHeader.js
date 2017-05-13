@@ -1,7 +1,8 @@
 import React from 'react'
-import { days } from '../../variables'
+import { days, defaultStyles } from '../../variables'
 
 const DayHeader = (props) => {
+	let style = Object.assign({}, styles.common, (props.day === 0) ? styles.holiday : {})
 	return (
 		<div style={style}>
 			{days[props.day]}
@@ -9,12 +10,24 @@ const DayHeader = (props) => {
 	)
 }
 
-const style = {
-	border: '1px solid #3F8CA6',
-	display: 'inline-block',
-	padding: '5px 0',
-	textAlign: 'center',
-	width: (100/7 - 0.2) + '%'
+const styles = {
+	common: {
+		background: 'transparent',
+		borderBottom: '1px solid ' + defaultStyles.primaryColor,
+		borderTop: '1px solid ' + defaultStyles.primaryColor,
+		boxSizing: 'border-box',
+		color: defaultStyles.primaryColor,
+		display: 'inline-block',
+		fontSize: '0.9em',
+		lineHeight: '1.8em',
+		overflow: 'hidden',
+		padding: '5px 0',
+		textAlign: 'center',
+		width: 100/7 + '%'
+	},
+	holiday: {
+		color: defaultStyles.holidayColor
+	}	
 }
 
 export default DayHeader

@@ -1,5 +1,5 @@
 import React from 'react'
-import { months } from '../../variables'
+import { months, defaultStyles } from '../../variables'
 
 const MonthNavigator = (props) => {
 	return (
@@ -14,16 +14,22 @@ const MonthNavigator = (props) => {
 const styles = {
 	monthNavigator: {
 		display: 'inline-block',
-		margin: '0 5px'
+		margin: '0'
 	},
 	navigationButton: {
+		border: '1px solid ' + defaultStyles.primaryColor,
+		background: 'transparent',
+		borderRadius: '3px',
+		color: defaultStyles.primaryColor,
+		cursor: 'pointer',
 		display: 'inline-block',
-		padding: '5px 10px',
-		margin: '0 5px',
-		cursor: 'pointer'
+		margin: '0',
+		padding: '10px 15px',
 	},
 	monthDropdown: {
+		color: defaultStyles.primaryColor,
 		display: 'inline-block',
+		padding: '10px 0',
 		textAlign: 'center',
 		width: '150px'
 	}

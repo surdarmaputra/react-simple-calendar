@@ -58,7 +58,11 @@ const populateCurrentMonthDates = (currentDate) => {
 	let dayBlocks = []
 	for (let date = 1; date <= dayCount; date++) {
 		let dateObject = new Date(currentDate.getFullYear(), currentDate.getMonth(), date)
-		dayBlocks.push(<DayBlock key={'curr-month-' + date} date={dateObject} today={dateObject.toDateString() == today.toDateString()}/>)
+		dayBlocks.push(<DayBlock 
+			key={'curr-month-' + date} 
+			date={dateObject} 
+			today={dateObject.toDateString() == today.toDateString()}
+			holiday={dateObject.getDay() === 0}/>)
 	}
 	return dayBlocks
 }

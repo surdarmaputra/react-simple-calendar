@@ -3,9 +3,9 @@ import React from 'react'
 import Navigation from './navigations/Navigation'
 import CalendarBoard from './boards/CalendarBoard'
 
-export default class CalendarWrapper extends React.Component {
-	constructor() {
-		super()
+class CalendarWrapper extends React.Component {
+	constructor(props) {
+		super(props)
 
 		this.state = {
 			currentDate: new Date()
@@ -33,8 +33,9 @@ export default class CalendarWrapper extends React.Component {
 	}
 
 	render() {
+		let style = Object.assign({}, styles, {height: this.props.height, width: this.props.width})
 		return (
-			<div>
+			<div style={style}>
 				<Navigation 
 					currentYear={this.state.currentDate.getFullYear()}
 					currentMonth={this.state.currentDate.getMonth()} 
@@ -47,3 +48,9 @@ export default class CalendarWrapper extends React.Component {
 		)
 	}
 }
+
+const styles = {
+	fontFamily: 'Arial'
+}
+
+export default CalendarWrapper

@@ -1,5 +1,6 @@
 import React from 'react'
 import MonthNavigator from './MonthNavigator'
+import { defaultStyles } from '../../variables'
 
 const Navigation = (props) => {
 	return (
@@ -22,9 +23,14 @@ const styles = {
 		textAlign: 'center'
 	},
 	goToToday: {
+		border: '1px solid ' + defaultStyles.highlightColor,
+		borderRadius: '3px',
+		background: 'transparent',
+		color: defaultStyles.highlightColor,
+		cursor: 'pointer',
 		display: 'inline-block',
 		margin: '0 5px',
-		padding: '5px 10px'
+		padding: '10px 15px'
 	}
 }
 
