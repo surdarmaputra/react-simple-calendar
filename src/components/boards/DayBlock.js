@@ -1,5 +1,6 @@
 import React from 'react'
 import { defaultStyles } from '../../variables'
+import BlockWidget from './BlockWidget'
 
 const DayBlock = (props) => {
 	let style = Object.assign({}, 
@@ -8,11 +9,20 @@ const DayBlock = (props) => {
 		(props.today) ? styles.today : {},
 		(props.holiday) ? styles.holiday : {}
 	)
+	let events = [
+		{ title: 'Event 1' }
+	]
+
 	return (
 		<div style={style}>
 			<div style={styles.content}>
 				{props.date.getDate()}
 			</div>
+			<BlockWidget 
+				events={events} 
+				disabled={props.disabled}
+				today={props.today}
+				holiday={props.holiday} />
 		</div>
 	)
 }
