@@ -19,10 +19,12 @@ const DayBlock = (props) => {
 				{props.date.getDate()}
 			</div>
 			<BlockWidget 
+				date={props.date}
 				events={events} 
 				disabled={props.disabled}
 				today={props.today}
-				holiday={props.holiday} />
+				holiday={props.holiday}
+				toggleEventList={props.toggleEventList} />
 		</div>
 	)
 }
@@ -58,8 +60,7 @@ const styles = {
 		padding: '5px',
 		left: 0,
 		top: 0,
-		right: 0,
-		bottom: 0
+		right: 0
 	},
 	holiday: {
 		color: defaultStyles.holidayColor

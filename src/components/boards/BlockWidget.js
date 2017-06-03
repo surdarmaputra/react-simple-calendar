@@ -9,8 +9,9 @@ const BlockWidget = (props) => {
 		(props.holiday) ? styles.holiday : {}
 	)
 	let eventCount = props.events.length
+
 	return (
-		<div style={style}>
+		<div style={style} onClick={() => props.toggleEventList(props.date, props.events)}>
 			{eventCount} event{eventCount > 1 ? 's' : ''}
 		</div>
 	)
@@ -22,10 +23,12 @@ const styles = {
 		borderRadius: '50px',
 		boxSizing: 'border-box',
 		color: defaultStyles.borderColor,
+		cursor: 'pointer',
 		display: 'inline-block',
 		fontSize: '0.7em',
 		margin: '5px',
-		padding: '3px 8px'
+		padding: '3px 8px',
+		zIndex: '2'
 	},
 	active: {
 		border: '1px solid ' + defaultStyles.primaryColor,
