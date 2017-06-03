@@ -17,6 +17,7 @@ class CalendarWrapper extends React.Component {
 		this.goToToday = this.goToToday.bind(this)
 		this.toggleMonthDropdownModal = this.toggleMonthDropdownModal.bind(this)
 		this.goToMonth = this.goToMonth.bind(this)
+		this.toggleEventList = this.toggleEventList.bind(this)
 	}
 
 	showPrevMonth() {
@@ -43,6 +44,12 @@ class CalendarWrapper extends React.Component {
 		this.setState({currentDate: new Date(year, month)})
 	}
 
+	toggleEventList(date, events = []) {
+		console.log('event list opened')
+		console.log(date)
+		console.log(events)
+	}
+
 	render() {
 		let style = Object.assign({}, styles, {height: this.props.height, width: this.props.width})
 		return (
@@ -57,7 +64,8 @@ class CalendarWrapper extends React.Component {
 					toggleMonthDropdownModal={this.toggleMonthDropdownModal}
 					goToMonth={this.goToMonth} />
 				<CalendarBoard 
-					currentDate={this.state.currentDate} />
+					currentDate={this.state.currentDate} 
+					toggleEventList={this.toggleEventList} />
 			</div>
 		)
 	}
