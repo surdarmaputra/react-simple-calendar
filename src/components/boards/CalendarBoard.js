@@ -14,7 +14,7 @@ const CalendarBoard = (props) => {
 	let dayBlocks = []
 
 	let prevMonthLastDates = populatePrevMonthLastDates(currentMonthFirstDate, prevMonthLastDate)
-	let currentMonthDates = populateCurrentMonthDates(props.currentDate, props.toggleEventList, props.events)
+	let currentMonthDates = populateCurrentMonthDates(props.currentDate, props.onDateClick, props.events)
 	let nextMontFirstDates = populateNextMonthFirstDates(currentMonthLastDate)
 
 	prevMonthLastDates.map((item) => dayBlocks.push(item))
@@ -52,7 +52,7 @@ const populatePrevMonthLastDates = (currentMonthFirstDate, prevMonthLastDate) =>
 	return dayBlocks
 }
 
-const populateCurrentMonthDates = (currentDate, toggleEventListCallback, eventList) => {
+const populateCurrentMonthDates = (currentDate, onDateClickCallback, eventList) => {
 	let today = new Date()
 	let dayCount = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0).getDate()
 	let dayBlocks = []
@@ -66,7 +66,7 @@ const populateCurrentMonthDates = (currentDate, toggleEventListCallback, eventLi
 			today={dateObject.toDateString() == today.toDateString()}
 			holiday={dateObject.getDay() === 0}
 			events={events}
-			toggleEventList={toggleEventListCallback}/>)
+			onDateClick={onDateClickCallback}/>)
 	}
 	return dayBlocks
 }

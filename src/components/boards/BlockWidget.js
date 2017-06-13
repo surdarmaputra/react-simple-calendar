@@ -11,7 +11,7 @@ const BlockWidget = (props) => {
 	let eventCount = props.events.length
 
 	return (
-		<div style={style} onClick={() => props.toggleEventList(props.date, props.events)}>
+		<div style={style}>
 			{eventCount} event{eventCount > 1 ? 's' : ''}
 		</div>
 	)
@@ -24,7 +24,6 @@ const styles = {
 		bottom: '0',
 		boxSizing: 'border-box',
 		color: defaultStyles.borderColor,
-		cursor: 'pointer',
 		display: 'inline-block',
 		fontSize: '0.7em',
 		margin: '5px',

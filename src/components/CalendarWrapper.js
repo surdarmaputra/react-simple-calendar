@@ -17,23 +17,32 @@ class CalendarWrapper extends React.Component {
 		this.goToToday = this.goToToday.bind(this)
 		this.toggleMonthDropdownModal = this.toggleMonthDropdownModal.bind(this)
 		this.goToMonth = this.goToMonth.bind(this)
-		this.toggleEventList = this.toggleEventList.bind(this)
+		this.onDateClick = this.onDateClick.bind(this)
 	}
 
 	showPrevMonth() {
+		let dateBefore = this.state.currentDate
 		let currentMonth = (this.state.currentDate.getMonth() > 0) ? this.state.currentDate.getMonth() - 1 : 11
 		let currentYear = (currentMonth === 11) ? this.state.currentDate.getFullYear() - 1 : this.state.currentDate.getFullYear()
-		this.setState({currentDate: new Date(currentYear, currentMonth)})
-	}
+		let currentDate = new Date(currentYear, currentMonth)
+		this.setState({currentDate: currentDate})
+		this.onMonthChange(dateBefore, currentDate)
+}
 
 	showNextMonth() {
+		let dateBefore = this.state.currentDate
 		let currentMonth = (this.state.currentDate.getMonth() < 11) ? this.state.currentDate.getMonth() + 1 : 0
 		let currentYear = (currentMonth === 0) ? this.state.currentDate.getFullYear() + 1 : this.state.currentDate.getFullYear()
-		this.setState({currentDate: new Date(currentYear, currentMonth)})
+		let currentDate = new Date(currentYear, currentMonth)
+		this.setState({currentDate: currentDate})
+		this.onMonthChange(dateBefore, currentDate)
 	}
 
 	goToToday() {
-		this.setState({currentDate: new Date()})
+		let dateBefore = this.state.currentDate
+		let today = new Date()
+		this.setState({currentDate: today})
+		this.onMonthChange(dateBefore, today)
 	}
 
 	toggleMonthDropdownModal() {
@@ -41,23 +50,23 @@ class CalendarWrapper extends React.Component {
 	}
 
 	goToMonth(month, year) {		
-		this.setState({currentDate: new Date(year, month)})
+		let dateBefore = this.state.currentDate
+		let currentDate = new Date(year, month)
+		this.setState({currentDate: currentDate})
+		this.onMonthChange(dateBefore, currentDate)	
 	}
 
-	toggleEventList(date, events = []) {
-		console.log('event list opened')
-		console.log(date)
-		console.log(events)
+	onDateClick(date, events = []) {
+		return (typeof this.props.onDateClick !== 'undefined' && this.props.onDateClick !== null) ? this.props.onDateClick(date, events) : {}
+	}
+
+	onMonthChange(dateObjectBefore, dateObjectAfter) {
+		return (typeof this.props.onMonthChange !== 'undefined' && this.props.onMonthChange !== null) ? this.props.onMonthChange(dateObjectBefore, dateObjectAfter) : {}
 	}
 
 	render() {
 		let style = Object.assign({}, styles, {height: this.props.height, width: this.props.width})
-		let events = {
-			'2017-06-10': [
-				{ title: 'Example' },
-				{ title: 'Example 2' }
-			]
-		}
+
 		return (
 			<div style={style}>
 				<Navigation 
@@ -71,8 +80,8 @@ class CalendarWrapper extends React.Component {
 					goToMonth={this.goToMonth} />
 				<CalendarBoard 
 					currentDate={this.state.currentDate}
-					events={events} 
-					toggleEventList={this.toggleEventList} />
+					events={this.props.events} 
+					onDateClick={this.onDateClick} />
 			</div>
 		)
 	}
