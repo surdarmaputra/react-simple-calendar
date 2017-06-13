@@ -9,22 +9,22 @@ const DayBlock = (props) => {
 		(props.today) ? styles.today : {},
 		(props.holiday) ? styles.holiday : {}
 	)
-	let events = [
-		{ title: 'Event 1' }
-	]
+	
+	let blockWidget = (typeof props.events !== 'undefined' && props.events !== null && props.events.constructor === Array) ? <BlockWidget 
+				date={props.date}
+				events={props.events} 
+				disabled={props.disabled}
+				today={props.today}
+				holiday={props.holiday}
+				toggleEventList={props.toggleEventList} /> : '';
+
 
 	return (
 		<div style={style}>
 			<div style={styles.content}>
 				{props.date.getDate()}
 			</div>
-			<BlockWidget 
-				date={props.date}
-				events={events} 
-				disabled={props.disabled}
-				today={props.today}
-				holiday={props.holiday}
-				toggleEventList={props.toggleEventList} />
+			{blockWidget}
 		</div>
 	)
 }
@@ -60,7 +60,8 @@ const styles = {
 		padding: '5px',
 		left: 0,
 		top: 0,
-		right: 0
+		right: 0,
+		bottom: 0
 	},
 	holiday: {
 		color: defaultStyles.holidayColor
