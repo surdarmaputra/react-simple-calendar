@@ -16,11 +16,11 @@ const DayBlock = (props) => {
 				disabled={props.disabled}
 				today={props.today}
 				holiday={props.holiday}
-				toggleEventList={props.toggleEventList} /> : '';
+				onDateClick={props.onDateClick} /> : '';
 
 
 	return (
-		<div style={style}>
+		<div style={style} onClick={() => (typeof props.onDateClick !== 'undefined' && props.onDateClick !== null) ? props.onDateClick(props.date, props.events) : {}}>
 			<div style={styles.content}>
 				{props.date.getDate()}
 			</div>
@@ -32,6 +32,7 @@ const DayBlock = (props) => {
 const styles = {
 	common: {
 		boxSizing: 'border-box',
+		cursor: 'pointer',
 		display: 'inline-block',
 		marginBottom: '-5px',
 		overflow: 'hidden',
