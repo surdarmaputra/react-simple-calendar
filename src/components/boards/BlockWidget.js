@@ -21,6 +21,7 @@ const styles = {
 	common: {
 		border: '1px solid  ' + defaultStyles.borderColor,
 		borderRadius: '50px',
+		bottom: '0',
 		boxSizing: 'border-box',
 		color: defaultStyles.borderColor,
 		cursor: 'pointer',
@@ -28,6 +29,8 @@ const styles = {
 		fontSize: '0.7em',
 		margin: '5px',
 		padding: '3px 8px',
+		position: 'absolute',
+		right: '0',
 		zIndex: '2'
 	},
 	active: {

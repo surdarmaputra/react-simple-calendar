@@ -52,6 +52,12 @@ class CalendarWrapper extends React.Component {
 
 	render() {
 		let style = Object.assign({}, styles, {height: this.props.height, width: this.props.width})
+		let events = {
+			'2017-06-10': [
+				{ title: 'Example' },
+				{ title: 'Example 2' }
+			]
+		}
 		return (
 			<div style={style}>
 				<Navigation 
@@ -64,7 +70,8 @@ class CalendarWrapper extends React.Component {
 					toggleMonthDropdownModal={this.toggleMonthDropdownModal}
 					goToMonth={this.goToMonth} />
 				<CalendarBoard 
-					currentDate={this.state.currentDate} 
+					currentDate={this.state.currentDate}
+					events={events} 
 					toggleEventList={this.toggleEventList} />
 			</div>
 		)

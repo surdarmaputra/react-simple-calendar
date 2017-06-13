@@ -14,7 +14,7 @@ const CalendarBoard = (props) => {
 	let dayBlocks = []
 
 	let prevMonthLastDates = populatePrevMonthLastDates(currentMonthFirstDate, prevMonthLastDate)
-	let currentMonthDates = populateCurrentMonthDates(props.currentDate, props.toggleEventList)
+	let currentMonthDates = populateCurrentMonthDates(props.currentDate, props.toggleEventList, props.events)
 	let nextMontFirstDates = populateNextMonthFirstDates(currentMonthLastDate)
 
 	prevMonthLastDates.map((item) => dayBlocks.push(item))
@@ -52,17 +52,20 @@ const populatePrevMonthLastDates = (currentMonthFirstDate, prevMonthLastDate) =>
 	return dayBlocks
 }
 
-const populateCurrentMonthDates = (currentDate, toggleEventListCallback) => {
+const populateCurrentMonthDates = (currentDate, toggleEventListCallback, eventList) => {
 	let today = new Date()
 	let dayCount = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0).getDate()
 	let dayBlocks = []
 	for (let date = 1; date <= dayCount; date++) {
 		let dateObject = new Date(currentDate.getFullYear(), currentDate.getMonth(), date)
+		let eventIndex = generateEventIndex(dateObject)
+		let events = (typeof eventList !== 'undefined' && typeof eventList[eventIndex] !== 'undefined') ? eventList[eventIndex] : null
 		dayBlocks.push(<DayBlock 
 			key={'curr-month-' + date} 
 			date={dateObject} 
 			today={dateObject.toDateString() == today.toDateString()}
 			holiday={dateObject.getDay() === 0}
+			events={events}
 			toggleEventList={toggleEventListCallback}/>)
 	}
 	return dayBlocks
@@ -76,6 +79,20 @@ const populateNextMonthFirstDates = (currentMonthLastDate) => {
 		dayBlocks.push(<DayBlock key={'next-month-' + date} date={dateObject} disabled={true} />)
 	}
 	return dayBlocks
+}
+
+const generateEventIndex = (dateObject) => {
+	let eventIndex = `${dateObject.getFullYear()}-${leftPad(dateObject.getMonth() + 1, 2, '0')}-${leftPad(dateObject.getDate(), 2, '0')}`
+	return eventIndex
+}
+
+const leftPad = (initialString, lengthExpected, paddedChar) => {
+	let padCount = lengthExpected - (initialString + '').length
+	let newString = initialString
+	for (let i = 0; i < padCount; i++) {
+		newString = paddedChar + newString
+	}
+	return newString
 }
 
 const styles = {
